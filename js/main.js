@@ -80,6 +80,9 @@ window.initMap = () => {
     center: loc,
     scrollwheel: false
   });
+  self.map.addListener('idle', () => {
+    document.getElementsByTagName('iframe')[0].title = "restaurants on map";
+  });
   updateRestaurants();
 }
 
