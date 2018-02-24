@@ -14,6 +14,9 @@ window.initMap = () => {
         center: restaurant.latlng,
         scrollwheel: false
       });
+      self.map.addListener('idle', () => {
+        document.getElementsByTagName('iframe')[0].title = restaurant.name;
+      });
       fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
     }
@@ -58,6 +61,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.alt = restaurant.name;
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
@@ -118,18 +122,22 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
 createReviewHTML = (review) => {
   const li = document.createElement('li');
   const name = document.createElement('p');
+  name.classList = 'review-name';
   name.innerHTML = review.name;
   li.appendChild(name);
 
   const date = document.createElement('p');
+  date.classList = 'review-date';
   date.innerHTML = review.date;
   li.appendChild(date);
 
   const rating = document.createElement('p');
+  rating.classList = 'review-rating';
   rating.innerHTML = `Rating: ${review.rating}`;
   li.appendChild(rating);
 
   const comments = document.createElement('p');
+  comments.classList = 'review-comments';
   comments.innerHTML = review.comments;
   li.appendChild(comments);
 
