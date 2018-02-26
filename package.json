@@ -1,0 +1,29 @@
+{
+  "name": "mws-restaurant-stage-1",
+  "version": "1.0.0",
+  "description": "Udacity Restaurant Project",
+  "main": "sw.js",
+  "scripts": {
+    "start": "grunt && php -S localhost:3333"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mycroft1891/mws-restaurant-stage-1.git"
+  },
+  "author": "Alexander Luna",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mycroft1891/mws-restaurant-stage-1/issues"
+  },
+  "homepage": "https://github.com/Mycroft1891/mws-restaurant-stage-1#readme",
+  "devDependencies": {
+    "grunt": "^1.0.2",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-nodeunit": "^1.0.0",
+    "grunt-contrib-uglify": "^3.3.0",
+    "grunt-mkdir": "^1.0.0",
+    "grunt-responsive-images": "^1.10.1"
+  }
+}
