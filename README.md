@@ -80,7 +80,7 @@ After all the changes the PWA score went up from 42 points to 91 points. The onl
 
 
 ## Code Credit
-Some of the code I used are based of some articles I read and course I took at during this Nanodegree:
+Some of the code I used is based of some articles I read and courses I took during this Nanodegree:
 - Service Worker: Based on the [SW course on Udacity](https://eu.udacity.com/course/offline-web-applications--ud899) with my own changes and ES6 features
 - Image resizing (`Gruntfile.js`): Based on the [Responsive Image course on Udacity](https://eu.udacity.com/course/responsive-images--ud882) and [MDN Docs](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)
 - Responsive CSS: Based on [Responsive Web Fundamentals](https://eu.udacity.com/course/responsive-web-design-fundamentals--ud893)
