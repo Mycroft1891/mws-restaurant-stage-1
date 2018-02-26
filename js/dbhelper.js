@@ -149,8 +149,10 @@ class DBHelper {
   /**
    * Restaurant image URL.
    */
-  static imageUrlForRestaurant(restaurant) {
-    return (`/img/${restaurant.photograph}`);
+  static imageUrlForRestaurant(restaurant, size) {
+    // return responsive image based on size
+    let restaurant_image = restaurant.photograph.split('.').join(`-${size}.`);
+    return (`/img/prod/${restaurant_image}`);
   }
 
   /**
