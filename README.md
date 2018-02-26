@@ -34,7 +34,7 @@ In order to run the project, you need now nodeJS and PHP using NPM scripts run:
 # install all the dependencies
 npm install
 
-# start the image processing and server
+# start the image processing and server port 3333
 npm start
 ```
 
