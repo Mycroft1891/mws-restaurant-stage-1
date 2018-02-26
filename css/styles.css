@@ -44,7 +44,7 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
   color: #b1b1b1;
   font-size: 8pt;
   letter-spacing: 1px;
-  padding: 1.5rem 0rem;
+  padding: 1.5rem 0;
   text-align: center;
   text-transform: uppercase;
 }
@@ -125,7 +125,7 @@ nav h1 a {
   font-size: 11pt;
   height: 2rem;
   letter-spacing: 0;
-  margin: .5rem;
+  margin: 0.5rem;
   padding: 0 10px;
   width: 12rem;
 }
@@ -135,16 +135,16 @@ nav h1 a {
   background-color: #f3f3f3;
   list-style: outside none none;
   margin: 0;
-	padding: .5rem .5rem 2rem;
+	padding: 0.5rem 0.5rem 2rem;
   text-align: center;
 }
 #restaurants-list li {
   background-color: #fff;
   border: 2px solid #ccc;
   font-family: Arial,sans-serif;
-	margin: .5rem;
+	margin: 0.5rem;
   min-height: 380px;
-	padding: 0 .5rem 2rem;
+	padding: 0 0.5rem 2rem;
   text-align: left;
 	width: calc((100vw / 3) - 3rem);
 	display: inline-grid;
@@ -154,8 +154,6 @@ nav h1 a {
   display: block;
   margin: 0;
   max-width: 100%;
-  min-height: 248px;
-  min-width: 100%;
 }
 #restaurants-list li h1 {
   color: #f18200;
@@ -264,7 +262,6 @@ nav h1 a {
   list-style-type: none;
   margin: 0 0 30px;
   overflow: hidden;
-	/* padding: 0 1.5rem 1rem; */
   position: relative;
   width: 95%;
 }
@@ -292,10 +289,10 @@ nav h1 a {
 .review-rating {
 	display: inline-block;
   border: 1px solid #a56900;
-  border-radius: .2rem;
+  border-radius: 0.2rem;
   background-color: #a56900;
   color: white;
-  padding: .2rem 1rem;
+  padding: 0.2rem 1rem;
   margin-left: 1.5rem;
 }
 .review-comments {
@@ -305,15 +302,15 @@ nav h1 a {
 /* ====================== Define Media Queries ====================== */
 @media (max-width: 499px) {
 	nav h1 a {
-    letter-spacing: .3rem;
+    letter-spacing: 0.3rem;
 	}
 	#restaurants-list li {
-		margin: .5rem 0rem;
+		margin: 0.5rem 0;
 		width: 90%;
 	}
 	.filter-options select {
 		margin: 0.1rem;
-    padding: 0 .2rem;
+    padding: 0 0.2rem;
     width: 9.5rem;
 	}
 	#restaurant-container, #reviews-container {
