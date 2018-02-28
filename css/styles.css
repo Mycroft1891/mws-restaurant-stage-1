@@ -213,7 +213,7 @@ nav h1 a {
   width: 50%;
 }
 #restaurant-name {
-  color: #d57200;
+  color: #aa5a00;
   font-family: Arial,sans-serif;
   font-size: 20pt;
   font-weight: 200;
@@ -245,7 +245,7 @@ nav h1 a {
   border-bottom: 1px solid #d9d9d9;
   border-top: 1px solid #fff;
 	padding: 4rem 2rem 1rem;
-  width: 45%;
+  width: calc(50% - 4rem);
 }
 #reviews-container h2 {
   color: #aa5a00;
@@ -335,9 +335,17 @@ nav h1 a {
 	#breadcrumb-nav {
 		width: 100%;
 	}
+	/* reduce top spacing on smaller screens */
+	#restaurant-name {
+		margin: 2rem 0 1rem;
+	}
 	#restaurant-container, #reviews-container {
 		margin: auto;
 		padding: 4rem 1rem 1rem;
+	}
+	/* reduce top spacing on smaller screens */
+	#reviews-container {
+		padding: 2rem 1rem;
 	}
 	.inside #map-container {
 		position: relative;
