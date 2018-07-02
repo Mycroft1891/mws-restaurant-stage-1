@@ -3,26 +3,29 @@ let restaurants,
   cuisines
 var map
 var markers = []
-
+let observer = new IntersectionObserver(onIntersection);
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
-document.addEventListener('DOMContentLoaded', (event) => {
+window.addEventListener('load', (event) => {
   fetchNeighborhoods();
   fetchCuisines();
 });
+
+function showMap(mapPlaceholder) {
+  const mapElement = document.getElementById('map');
+  mapPlaceholder.style.display = 'none';
+  mapElement.style.display = 'block';
+}
 
 /**
  * Fetch all neighborhoods and set their HTML.
  */
 fetchNeighborhoods = () => {
   DBHelper.fetchNeighborhoods((error, neighborhoods) => {
-    if (error) { // Got an error
-      console.error(error);
-    } else {
-      self.neighborhoods = neighborhoods;
-      fillNeighborhoodsHTML();
-    }
+    if (error) return console.error(error);
+    self.neighborhoods = neighborhoods;
+    fillNeighborhoodsHTML();
   });
 }
 
@@ -44,12 +47,9 @@ fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
  */
 fetchCuisines = () => {
   DBHelper.fetchCuisines((error, cuisines) => {
-    if (error) { // Got an error!
-      console.error(error);
-    } else {
-      self.cuisines = cuisines;
-      fillCuisinesHTML();
-    }
+    if (error) return console.error(error);
+    self.cuisines = cuisines;
+    fillCuisinesHTML();
   });
 }
 
@@ -100,12 +100,9 @@ updateRestaurants = () => {
   const neighborhood = nSelect[nIndex].value;
 
   DBHelper.fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, (error, restaurants) => {
-    if (error) { // Got an error!
-      console.error(error);
-    } else {
-      resetRestaurants(restaurants);
-      fillRestaurantsHTML();
-    }
+    if (error) return console.error(error);
+    resetRestaurants(restaurants);
+    fillRestaurantsHTML();
   })
 }
 
@@ -142,13 +139,9 @@ createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
 
   const image = document.createElement('img');
+  image.setAttribute('dataset', restaurant.photograph);
   image.className = 'restaurant-img';
-  image.src = DBHelper.imageUrlForRestaurant(restaurant, 'small');
-  image.srcset = `
-    ${DBHelper.imageUrlForRestaurant(restaurant, 'small')},
-    ${DBHelper.imageUrlForRestaurant(restaurant, 'medium')},
-    ${DBHelper.imageUrlForRestaurant(restaurant, 'large')},
-  `
+  image.style.display = 'none';
   image.alt = `Restaurant ${restaurant.name}`;
   li.append(image);
 
@@ -168,8 +161,23 @@ createRestaurantHTML = (restaurant) => {
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
   li.append(more)
-
+  observer.observe(li)
   return li
+}
+
+function onIntersection(elements) {
+  console.log('Image entering view');
+  elements.forEach(element => {
+    if (element.intersectionRatio > 0) {
+      const image = element.target.firstChild;
+      const restaurant = image.attributes.dataset.value;
+      const src = DBHelper.imageUrlForRestaurant(restaurant);
+      image.src = src + '-small.jpg';
+      image.srcset = `${src + '-small.jpg'}, ${src + '-medium.jpg'}, ${src + '-large.jpg'}`;
+      image.style.display = 'block';
+      observer.unobserve(element.target);
+    }
+  });
 }
 
 /**
@@ -177,7 +185,6 @@ createRestaurantHTML = (restaurant) => {
  */
 addMarkersToMap = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
-    // Add marker to the map
     const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.map);
     google.maps.event.addListener(marker, 'click', () => {
       window.location.href = marker.url

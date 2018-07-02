@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width">
   <meta name="theme-color" content="#333">
   <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
-  <link rel="stylesheet" href="css/styles.css">
   <link rel="manifest" href="manifest.json">
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-icon-57x57.png">
@@ -23,6 +22,9 @@
   <link rel="icon" type="image/png" sizes="96x96" href="/icon/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png">
   <title>Restaurant Reviews</title>
+  <style media="screen">
+    @charset "utf-8";body{background-color:#fdfdfd;margin:0;position:relative;font-family:Arial,Helvetica,sans-serif;font-size:10pt;color:#333}a{color:orange;text-decoration:none}a:focus,a:hover{color:#3397db;text-decoration:none}a img{border:none 0 #fff}h1,h2,h3,h4,h5,h6{margin:0 0 20px}article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}#maincontent{background-color:#f3f3f3;min-height:100%}#footer{background-color:#444;color:#b1b1b1;font-size:8pt;letter-spacing:1px;padding:1.5rem 0;text-align:center;text-transform:uppercase}nav{width:100%;height:3rem;background-color:#252831;text-align:center;padding-top:1rem}nav h1{margin:auto}nav h1 a{color:#fff;font-size:14pt;font-weight:200;letter-spacing:10px;text-transform:uppercase}#map{height:60vh;width:100%;background-color:#ccc}#map-placeholder{background-image:url(/img/map-image.png);background-size:cover;display:grid;padding:20vh 3vw;font-size:2rem;color:#2f4f4f}.filter-options{width:100%;height:5rem;background-color:#005892;text-align:center}.filter-options h2{color:#fff;font-size:1rem;font-weight:400;line-height:2;margin:0 20px}.filter-options select{background-color:#fff;border:1px solid #fff;font-family:Arial,sans-serif;font-size:11pt;height:2rem;letter-spacing:0;margin:.5rem;padding:0 10px;width:12rem}#restaurants-list{background-color:#f3f3f3;list-style:outside none none;margin:0;padding:.5rem .5rem 2rem;text-align:center}#restaurants-list li{background-color:#fff;border:2px solid #ccc;font-family:Arial,sans-serif;margin:.5rem;min-height:380px;padding:0 .5rem 2rem;text-align:left;width:calc((100vw / 3) - 3rem);display:inline-grid}#restaurants-list .restaurant-img{background-color:#ccc;display:none;margin:auto;max-width:100%}#restaurants-list li h2{color:#844700;font-family:Arial,sans-serif;font-size:14pt;font-weight:200;letter-spacing:0;line-height:1.3;margin:20px 0 10px;text-transform:uppercase}#restaurants-list p{margin:0;font-size:11pt}#restaurants-list li a{background-color:#844700;border-bottom:3px solid #eee;color:#fff;display:inline-block;font-size:10pt;margin:15px 0 0;padding:8px 30px 10px;text-align:center;text-decoration:none;text-transform:uppercase}@media (max-width:499px){nav h1 a{letter-spacing:.3rem}#restaurants-list li{margin:.5rem 0;width:90%}.filter-options select{margin:.1rem;padding:0 .2rem;width:9.5rem}}@media (min-width:500px) and (max-width:749px){#restaurants-list li{width:42%}}
+  </style>
 </head>
 
 <body>
@@ -39,24 +41,25 @@
 
   <main id="maincontent">
     <section id="map-container">
-      <div id="map" role="application"></div>
+      <div id="map-placeholder" onclick="showMap(this)">
+        <center><h2>Click for Live Map</h2></center>
+      </div>
+      <div id="map" role="application" style="display:none"></div>
     </section>
     <section>
       <div class="filter-options">
         <h2>Filter Results</h2>
-        <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
+        <select aria-label="neighborhoods" id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
           <option value="all">All Neighborhoods</option>
         </select>
-        <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
+        <select aria-label="cuisines" id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
           <option value="all">All Cuisines</option>
         </select>
       </div>
       <ul id="restaurants-list"></ul>
     </section>
   </main>
-  <script charset="utf-8" src="js/registerSW.js"></script>
-  <script charset="utf-8" src="js/dbhelper.js"></script>
-  <script charset="utf-8" src="js/main.js"></script>
+  <script src="js/prod/index.min.js" charset="utf-8"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtFvrhtulfSH_7R90jFKRMCCWDfmzFTYU&libraries=places&callback=initMap"></script>
 
 

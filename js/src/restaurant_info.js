@@ -1,6 +1,11 @@
 let restaurant;
 var map;
 
+showMap = (mapPlaceholder) => {
+  const mapElement = document.getElementById('map');
+  mapPlaceholder.style.display = 'none';
+  mapElement.style.display = 'block';
+}
 /**
  * Initialize Google map, called from HTML.
  */
@@ -60,11 +65,12 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
-  image.src = DBHelper.imageUrlForRestaurant(restaurant, 'small');
+  let source = DBHelper.imageUrlForRestaurant(restaurant.photograph);
+  image.src = source + '-small.jpg';
   image.srcset = `
-    ${DBHelper.imageUrlForRestaurant(restaurant, 'small')},
-    ${DBHelper.imageUrlForRestaurant(restaurant, 'medium')} 1.5x,
-    ${DBHelper.imageUrlForRestaurant(restaurant, 'large')} 2x,
+    ${source + '-small.jpg'},
+    ${source + '-medium.jpg'} 1.5x,
+    ${source + '-large.jpg'} 2x,
   `
   image.alt = `Restaurant ${restaurant.name}`;
 

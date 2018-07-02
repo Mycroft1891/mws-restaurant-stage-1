@@ -69,14 +69,14 @@ After all these changes the Accessibility score went from 45 points up to 100 po
 
 
 ## Progressive Web App
-I started running an Audit using Chromes built it Lighthouse and it go 42 point score. After that I started doing all the changes needed:
+I started running an Audit using Chromes built it Lighthouse and it got 42 point score. After that I started doing all the changes needed:
 
 - I wrote a basic Service Worker which will cache static assets such as the CSS and JS files. It will also cache the images gradually as the user navigates each page in a separate image-cache.
 - I added favicon icons for iOS and Android using [Favicon Generator](https://www.favicon-generator.org/)
 - I added `a manifest.json` file for the app name, entry points and color scheme.
 - Finally I added the required link and meta tags
 
-After all the changes the PWA score went up from 42 points to 91 points. The only change left on the PWA checklist is `redirect HTTP traffic to HTTPS` which is not possible using a development environment right now but using Firebase hosting and the free HTTPS it should fulfill that requirement.
+After all the changes the PWA score went up from 42 points to 91 points. The only change left on the PWA checklist is `redirect HTTP traffic to HTTPS` which is not possible using a development environment right now but using Firebase hosting and their free HTTPS it should fulfill that requirement.
 
 
 ## Code Credit
