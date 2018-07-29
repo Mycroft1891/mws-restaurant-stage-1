@@ -8,7 +8,7 @@
 
 **Performance**: I used the IntersectionObserver libary and the polyfill to lazy load images and prioritize the above the fold content. Google maps increased the time for the first paint by a lot therefore I added a placeholder image for the map. The user can load the map asynchronously by clicking the placeholder image. Netword calls have been reduced by checking offline stored content first and serving from cache/indexedDB. I used the built in indexedDB instead of a third party library to reduce the javascipt size.
 
-**Accessibility**: I changed the button colors to comply with the minimum contrast ratio while keeping the design as close to the original as possible. I added labels for the dropdown menus to make it easier for visual readers to understand the content. I also added a title to the map iframe asynchronously to give the visual reader a better idea of what the map shows.
+**Accessibility**: I changed the button colors to comply with the minimum contrast ratio while keeping the design as close to the original as possible. I added labels for the dropdown menus to make it easier for visual readers to understand the content. I also added a title to the map's iframe asynchronously to give the visual reader a better idea of what the map shows.
 
 
 ## Stage 1 and 2
