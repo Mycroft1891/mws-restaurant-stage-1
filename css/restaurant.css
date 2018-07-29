@@ -232,6 +232,30 @@ nav h1 a {
 	padding: 0 1.5rem;
 }
 
+/* ====================== Review Form ====================== */
+
+#review-form h3 {
+	border: 1px solid;
+	border-color: rgb(178, 0, 0);
+	border-radius: 0.2rem;
+	padding: 0.5rem;
+	color: rgb(178, 0, 0);
+}
+#form-name, #form-comment {
+	width: 100%;
+	line-height: 1.5rem;
+	margin-bottom: 0.5rem;
+}
+#form-submit {
+	border: none;
+	color: #fff;
+	background-color: #a56900;
+	padding: 0.5rem 1rem;
+	margin-bottom: 1rem;
+}
+label {
+	display: block;
+}
 /* ====================== Define Media Queries ====================== */
 @media (max-width: 499px) {
 	nav h1 a {
