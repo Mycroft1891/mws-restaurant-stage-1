@@ -12,6 +12,11 @@ class DBHelper {
     return `http://localhost:${port}/restaurants`;
   }
 
+  static get REVIEWS_URL() {
+    const port = 1337;
+    return `http://localhost:${port}/reviews/?restaurant_id=`;
+  }
+
   /**
    * Fetch all restaurants.
    */
@@ -22,11 +27,22 @@ class DBHelper {
       .then(response => response.json())
       .catch(e => callback(e.message, null))
       .then(restaurants => {
-        restaurants.forEach(res => IDB.saveRecord(res));
-        callback(null, restaurants);
-       })
+        DBHelper.fetchRestaurantReviews(restaurants, (updatedRestaurants) => {
+          updatedRestaurants.forEach(res => IDB.saveRecord(res));
+          callback(null, updatedRestaurants);
+        })
+      })
      }
    );
+  }
+
+  static fetchRestaurantReviews(restaurants, callback) {
+    restaurants.map(res => {
+      fetch(DBHelper.REVIEWS_URL + res.id)
+      .then(response => response.json())
+      .then(review => res.reviews = review)
+    })
+    callback(restaurants);
   }
 
   /**
