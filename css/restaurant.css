@@ -151,6 +151,10 @@ nav h1 a {
   text-transform: uppercase;
   line-height: 1.1;
 }
+#restaurant-favorite {
+	color: #fff;
+	padding: 0.5rem 1rem;
+}
 #restaurant-img {
 	width: 100%;
 }
@@ -175,6 +179,9 @@ nav h1 a {
   border-top: 1px solid #fff;
 	padding: 4rem 2rem 1rem;
   width: calc(50% - 4rem);
+}
+#reviews-container {
+	padding: 2rem 1rem 4rem 1rem;
 }
 #reviews-container h2 {
   color: #aa5a00;
@@ -284,9 +291,8 @@ label {
 		margin: auto;
 		padding: 4rem 1rem 1rem;
 	}
-	/* reduce top spacing on smaller screens */
 	#reviews-container {
-		padding: 2rem 1rem;
+		padding: 2rem 1rem 4rem 1rem;
 	}
 	.inside #map-container {
 		position: relative;

@@ -60,6 +60,10 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
 
+  const favorite = document.getElementById('restaurant-favorite');
+  favorite.innerHTML = restaurant.is_favorite ? "Saved as Favorite" : "Save as Favorite";
+  favorite.style.backgroundColor = restaurant.is_favorite ? "#a56900" : "#708090";
+
   const address = document.getElementById('restaurant-address');
   address.innerHTML = restaurant.address;
 
@@ -137,7 +141,7 @@ createReviewHTML = (review) => {
 
   const date = document.createElement('p');
   date.classList = 'review-date';
-  date.innerHTML = formatDate(review.createdAt);
+  date.innerHTML = formatDate(review.createdAt || new Date());
   li.appendChild(date);
 
   const rating = document.createElement('p');
@@ -181,8 +185,16 @@ getParameterByName = (name, url) => {
 }
 
 /**
- * Handle Review Form
+ * Handle Review Form and favorite
  */
+
+toggleFavorite = (button, restaurant = self.restaurant) => {
+  restaurant.is_favorite = !restaurant.is_favorite;
+  button.style.backgroundColor = restaurant.is_favorite ? "#a56900" : "#708090";
+  button.innerHTML = restaurant.is_favorite ? "Saved as Favorite" : "Save as Favorite";
+  IDB.updateRecord(restaurant);
+  fetch(`http://localhost:1337/restaurants/${restaurant.id}/?is_favorite=${restaurant.is_favorite}`)
+}
 const form_alert = document.getElementById("form-alert")
 let restaurant_id = window.location.href.split('=')[1];
 let pending_reviews = [];
@@ -224,7 +236,8 @@ handleForm = (form) => {
 }
 
 postReview = (payload) => {
-  console.log(payload);
+  self.restaurant.reviews.push(payload);
+  IDB.updateRecord(self.restaurant);
   fetch('http://localhost:1337/reviews/', {
     method: 'post',
     headers: {
@@ -236,8 +249,8 @@ postReview = (payload) => {
     .then(res => console.log(res));
 }
 
-formatDate = (ms) => {
-  const date = ms ? new Date(ms) : new Date();
+formatDate = (time) => {
+  const date = time ? new Date(time) : new Date();
 
   var months = [
     "January", "February", "March",
