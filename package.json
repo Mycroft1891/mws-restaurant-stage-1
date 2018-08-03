@@ -4,7 +4,7 @@
   "description": "Udacity Restaurant Project",
   "main": "sw.js",
   "scripts": {
-    "start": "grunt && php -S localhost:3333"
+    "start": "grunt && httpster -p 1234"
   },
   "repository": {
     "type": "git",

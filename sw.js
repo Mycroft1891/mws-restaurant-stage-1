@@ -1,8 +1,8 @@
 // declare cache names
-let cacheVersion    = '-v2';
+let cacheVersion    = '-v4';
 let staticCacheName = 'restaurant';
 let currentCache    = staticCacheName + cacheVersion;
-let imageCacheName  = 'restaurant-imgs'
+let imageCacheName  = 'restaurant-imgs';
 let currentImages   = imageCacheName + cacheVersion;
 let allCaches       = [currentCache, currentImages];
 
@@ -12,6 +12,7 @@ self.addEventListener('install', event => {
     caches.open(currentCache)
     .then(cache => {
       return cache.addAll([
+        '/',
         'js/prod/index.min.js',
         'js/prod/restaurant.min.js',
         'index.html',
@@ -66,7 +67,7 @@ self.addEventListener('fetch', event => {
 function servePhoto(request) {
   let imageURL = request.url
 
-  return caches.open(imageCacheName)
+  return caches.open(currentImages)
   .then(cache => {
     return cache.match(imageURL)
     .then(response => {
