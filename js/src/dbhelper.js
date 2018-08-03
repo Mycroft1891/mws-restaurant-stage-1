@@ -27,22 +27,23 @@ class DBHelper {
       .then(response => response.json())
       .catch(e => callback(e.message, null))
       .then(restaurants => {
-        DBHelper.fetchRestaurantReviews(restaurants, (updatedRestaurants) => {
-          updatedRestaurants.forEach(res => IDB.saveRecord(res));
-          callback(null, updatedRestaurants);
-        })
+        restaurants.forEach(res => IDB.saveRecord(res));
+        DBHelper.fetchRestaurantReviews(restaurants)
+        callback(null, restaurants);
       })
      }
    );
   }
 
-  static fetchRestaurantReviews(restaurants, callback) {
+  static fetchRestaurantReviews(restaurants) {
     restaurants.map(res => {
       fetch(DBHelper.REVIEWS_URL + res.id)
       .then(response => response.json())
-      .then(review => res.reviews = review)
+      .then(review => {
+        res.reviews = review;
+        IDB.updateRecord(res, res.id);
+      })
     })
-    callback(restaurants);
   }
 
   /**
