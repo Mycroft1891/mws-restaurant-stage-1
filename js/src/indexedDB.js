@@ -10,7 +10,6 @@ class IDB {
   }
 
   static getItems(callback) {
-    var count
     var request = window.indexedDB.open(data.dbname, data.version);
     request.onsuccess = function(event) {
       var db = event.target.result;
