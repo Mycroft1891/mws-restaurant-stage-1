@@ -251,6 +251,7 @@ handleForm = (form) => {
 }
 
 postReview = (payload) => {
+  self.restaurant.reviews.unshift(payload);
   IDB.updateRecord(self.restaurant);
   fetch('http://localhost:1337/reviews/', {
     method: 'post',

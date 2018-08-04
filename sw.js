@@ -13,7 +13,6 @@ self.addEventListener('install', event => {
       'index.html',
       'restaurant.html'
     ]))
-    // .then(self.skipWaiting())
   );
 });
 
