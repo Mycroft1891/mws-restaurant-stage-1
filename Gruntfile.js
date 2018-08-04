@@ -54,13 +54,14 @@ module.exports = function(grunt) {
       my_target: {
         files: {
           'js/prod/index.min.js': [
+            'js/src/registerSW.js',
             'js/src/IOPolyfill.js',
             'js/src/indexedDB.js',
-            'js/src/registerSW.js',
             'js/src/main.js',
             'js/src/dbhelper.js',
           ],
           'js/prod/restaurant.min.js': [
+            'js/src/registerSW.js',
             'js/src/indexedDB.js',
             'js/src/dbhelper.js',
             'js/src/restaurant_info.js',
