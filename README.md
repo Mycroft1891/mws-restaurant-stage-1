@@ -68,3 +68,5 @@ Some of the code I used is based of some articles I read and courses I took duri
 - Image resizing (`Gruntfile.js`): Based on the [Responsive Image course on Udacity](https://eu.udacity.com/course/responsive-images--ud882) and [MDN Docs](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)
 - Responsive CSS: Based on [Responsive Web Fundamentals](https://eu.udacity.com/course/responsive-web-design-fundamentals--ud893)
 - `mainfest.json`: This file was created by [Favicon Generator](https://www.favicon-generator.org/) not me, I just customized it to fit all the Chrome Lighthouse requirements using the PWA checklist and reference docs.
+- Clients Claim: I had to readup about [clients.claim()](https://developer.mozilla.org/en-US/docs/Web/API/Clients/claim)
+- serviceWorker brush up: I had to read the docs again [Service Worker Intro](https://developers.google.com/web/fundamentals/primers/service-workers/)
