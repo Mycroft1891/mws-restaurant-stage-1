@@ -1,11 +1,24 @@
 let restaurant;
 var map;
+let pending_reviews = [];
 
 showMap = (mapPlaceholder) => {
   const mapElement = document.getElementById('map');
   mapPlaceholder.style.display = 'none';
   mapElement.style.display = 'block';
 }
+
+
+/**
+ * Handle Offline & Online state
+ */
+
+window.addEventListener('online', event => {
+  updateFavoriteFor(self.restaurant);
+  if (pending_reviews.length == 0) return;
+  pending_reviews.forEach(review => postReview(review));
+});
+
 /**
  * Initialize Google map, called from HTML.
  */
@@ -193,22 +206,24 @@ toggleFavorite = (button, restaurant = self.restaurant) => {
   button.style.backgroundColor = restaurant.is_favorite ? "#a56900" : "#708090";
   button.innerHTML = restaurant.is_favorite ? "Saved as Favorite" : "Save as Favorite";
   IDB.updateRecord(restaurant);
-  fetch(`http://localhost:1337/restaurants/${restaurant.id}/?is_favorite=${restaurant.is_favorite}`)
+  if (window.navigator.onLine) {
+    updateFavoriteFor(restaurant);
+  }
 }
-const form_alert = document.getElementById("form-alert")
-let restaurant_id = window.location.href.split('=')[1];
-let pending_reviews = [];
 
-window.addEventListener('online', event => {
-  if (pending_reviews.length == 0) return;
-  pending_reviews.forEach(review => postReview(review))
-});
-
-window.addEventListener('offline', event => {
-  console.log('Currently offline');
-});
+updateFavoriteFor = (restaurant) => {
+  fetch(`http://localhost:1337/restaurants/${restaurant.id}/?is_favorite=${restaurant.is_favorite}`, {
+    method: 'put',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  });
+}
 
 handleForm = (form) => {
+  const form_alert = document.getElementById("form-alert");
+
   [name, rating, comment] = [form['name'].value, form['rating'].value, form['comment'].value];
   if (!name || !rating || !comment) {
     form_alert.hidden = false;
@@ -216,7 +231,7 @@ handleForm = (form) => {
   }
 
   let payload = {
-    "restaurant_id": restaurant_id,
+    "restaurant_id": self.restaurant.id,
     "name": name,
     "rating": rating,
     "comments": comment
@@ -236,7 +251,6 @@ handleForm = (form) => {
 }
 
 postReview = (payload) => {
-  self.restaurant.reviews.push(payload);
   IDB.updateRecord(self.restaurant);
   fetch('http://localhost:1337/reviews/', {
     method: 'post',
