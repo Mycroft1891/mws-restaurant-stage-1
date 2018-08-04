@@ -44,7 +44,7 @@
     "type": "image\/ico"
    }
   ],
-  "start_url": "./index.html",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#333",
   "background_color": "#fff"
